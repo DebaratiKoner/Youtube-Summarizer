@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Video Summarizer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Summarizer 🎬</h1>
+        <p class="subtitle">Summarize any video in seconds .</p>
+
+        <form method="post" action="/" class="form">
+            <input type="text" name="url" placeholder="Paste YouTube Video URL here..." required>
+            <button type="submit">Summarize</button>
+        </form>
+
+        {% if summary %}
+        <div class="result">
+            <h2>🎯 Topic: {{ summary.topic_name }}</h2>
+            <p>{{ summary.topic_summary }}</p>
+        </div>
+        {% endif %}
+
+        <footer>Made using FastAPI + Gemini</footer>
+    </div>
+</body>
+</html>
