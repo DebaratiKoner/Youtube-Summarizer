@@ -1,28 +1,71 @@
 # Youtube-Summarizer
 
-A web application that extracts the transcript from a YouTube video and generates a concise, meaningful summary using NLP or a Large Language Model (LLM) like OpenAI GPT, Gemini, or Hugging Face models.
+A FastAPI web application that summarizes YouTube videos using transcripts and Google Gemini AI.
 
-## 🚀 Features
+## Features
 
-- 🔗 Paste a YouTube video URL and extract the transcript (if available)
-- 🗣 Supports multi-language videos with subtitle availability
-- 🌐 Streamlit-based simple web interface
-- 🧰 Optional API/Backend support with FastAPI or Flask
+- Extracts transcript from YouTube videos.
+- Summarizes the transcript using Gemini AI.
+- Provides a web interface and API endpoints.
+- Returns summary in JSON format.
 
----
-
-## 🛠️ Tech Stack
-
-| Layer        | Technology                     |
-|--------------|--------------------------------|
-| Frontend     | Streamlit                      |
-| Backend/API  | Python, FastAPI/Flask (optional)|
-| AI/NLP Model | OpenAI GPT / T5 / Pegasus / Gemini |
-| Transcript   | `youtube-transcript-api`       |
-
----
-
-### 🔧 Requirements
+## Requirements
 
 - Python 3.8+
-- API Key (if using OpenAI or Gemini)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)
+- [google-generativeai](https://pypi.org/project/google-generativeai/)
+- [python-dotenv](https://pypi.org/project/python-dotenv/)
+- Jinja2
+
+## Setup
+
+1. **Clone the repository** and navigate to the project folder.
+
+2. **Install dependencies:**
+   ```powershell
+   pip install fastapi uvicorn youtube-transcript-api google-generativeai python-dotenv jinja2
+   ```
+
+3. **Set up environment variables:**
+   - Create a `.env` file in the root directory.
+   - Add your Gemini API key:
+     ```
+     GEMINI_API_KEY=your_gemini_api_key_here
+     ```
+
+4. **Run the application:**
+   ```powershell
+   uvicorn app:app --reload
+   ```
+
+5. **Access the web interface:**
+   - Open [http://localhost:8000](http://localhost:8000) in your browser.
+
+## Usage
+
+- **Web Interface:** Enter a YouTube video URL and get a summarized topic and description.
+- **API Endpoints:**
+  - `GET /summarize?url=YOUTUBE_URL`  
+    Returns summary JSON for the given YouTube video.
+  - `POST /summarize
+    Accepts JSON body with `url` field. Returns summary JSON.
+
+## File Structure
+
+- `app.py` - Main FastAPI application.
+- `index.html` - Web interface template.
+- `style.css` - Styles for the web interface.
+
+## Example Response
+```json
+{
+  "topic_name": "Sample Topic",
+  "topic_summary": "This is a brief summary of the YouTube video."
+}
+```
+
+## Notes
+
+- Ensure the YouTube video has transcripts available.
+- The Gemini API key is required for summarization.
